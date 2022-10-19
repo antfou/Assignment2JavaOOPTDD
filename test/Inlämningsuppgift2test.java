@@ -16,9 +16,6 @@ public class Inlämningsuppgift2test {
     Program program = new Program();
 
     Person testPerson = new Person("AlHamBra aromes","7703021234","2202-07-01");
-
-
-
     String inFile = "test/inputTest.txt";
     String outFile = "test/outputTest.txt";
     @Test
