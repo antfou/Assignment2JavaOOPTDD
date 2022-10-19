@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
@@ -10,7 +11,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ProgramFileHandler {
-
 
     public List<Person> readDataFromFile(String dataFromFile) {
         String nameAndIDnrLine; //Every odd-numbered line in the text doc
@@ -40,23 +40,31 @@ public class ProgramFileHandler {
         }return personList;
     }
 
-    public void printDataToFile(String outFile, List<Person> personList) {
+    public String printToFileHandler(Person person, String outFile) {
         Path outFilePath = Paths.get(outFile);//Fetches where the method will print to
-        try(PrintWriter printer = new PrintWriter(Files.newBufferedWriter(outFilePath))){
-            for (Person person : personList){
-                printer.println(person.getName() + " " + person.getIdNumber()  + "\n" + "Tränade senast: " + LocalDate.now());
+        String printableString = "";
+        try (FileWriter fileWriter = new FileWriter(outFilePath.toFile(), true);
+             PrintWriter printer = new PrintWriter(fileWriter)) {
+
+
+            if (person.hasPaid) {
+                printableString = person.name + " Tränade senast: " + LocalDate.now() + "\n";
+                printer.println(printableString);
             }
-            } catch (FileNotFoundException f) {
+
+            return printableString;
+        } catch (FileNotFoundException f) {
             System.out.println("Fil path till fil");
             f.printStackTrace();
-        }catch (IOException i){
+        } catch (IOException i) {
             System.out.println("Gick inte att skriva till filen");
             i.printStackTrace();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Vettefan vad som gick fel");
             e.printStackTrace();
         }
 
+
+        return printableString;
     }
 }
-
