@@ -53,7 +53,7 @@ public class ProgramFileHandler {
 
             return printableString;
         } catch (FileNotFoundException f) {
-            System.out.println("Fil path till fil");
+            System.out.println("Fel path till fil");
             f.printStackTrace();
         } catch (IOException i) {
             System.out.println("Gick inte att skriva till filen");
