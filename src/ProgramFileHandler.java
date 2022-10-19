@@ -12,14 +12,13 @@ import java.util.Scanner;
 
 public class ProgramFileHandler {
 
-    public List<Person> readDataFromFile(String dataFromFile) {
+    public List<Person> readDataFromFile(String inFilePathString) {
         String nameAndIDnrLine; //Every odd-numbered line in the text doc
         String lastPaymentDateLine; //Every even-numbered line in the text doc
-        Path inFilePath; //Path to read the text doc
         List<Person> personList = new ArrayList<>();
         String[] personDataNameAndIDnrLine = new String[2];
         String[] personDataLastPaymentDateLine = new String[1];
-        inFilePath = Paths.get(dataFromFile); //Gets the path for the file from outside the method for inFilePath
+        Path inFilePath = Paths.get(inFilePathString); //Gets the path for the file from outside the method for inFilePath
 
         try(Scanner fileScanner = new Scanner(inFilePath)){ //try + scanner för att läsa in från fil
             while(fileScanner.hasNext()){
